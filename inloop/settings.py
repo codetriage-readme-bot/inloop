@@ -68,6 +68,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
 
+
+if env.bool("ENABLE_HTMLCHECKS", default=False):
+    HTMLVALIDATOR_ENABLED = True
+    HTMLVALIDATOR_VNU_URL = "http://localhost:8888"
+    HTMLVALIDATOR_OUTPUT = 'stdout'
+    MIDDLEWARE.append("htmlvalidator.middleware.HTMLValidator")
+
+
 LOGIN_REDIRECT_URL = reverse_lazy("home")
 LOGIN_URL = reverse_lazy("home")
 
